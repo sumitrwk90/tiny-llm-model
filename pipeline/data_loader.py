@@ -1,4 +1,3 @@
-
 import torch
 from torch.utils.data import Dataset
 import pandas as pd
@@ -66,11 +65,13 @@ train_dataset = SpamDataset(
     tokenizer=tokenizer
 )
 
+
 val_dataset = SpamDataset(
     csv_file="data/raw/validation.csv",
     max_length=train_dataset.max_length,
     tokenizer=tokenizer
 )
+
 test_dataset = SpamDataset(
     csv_file="data/raw/test.csv",
     max_length=train_dataset.max_length,
@@ -99,3 +100,4 @@ test_loader = DataLoader(
     num_workers=num_workers,
     drop_last=False,
 )
+

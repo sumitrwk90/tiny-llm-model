@@ -4,7 +4,7 @@ import os
 
 
 # Data Loading...
-df = pd.read_csv(r"D:\tiny-llm-colab-train\src\2_data_collection.py", sep="\t", header=None, names=["Label", "Text"])
+df = pd.read_csv(r"D:\tiny-llm-model\data_source\SMSSpamCollection.tsv", sep="\t", header=None, names=["Label", "Text"])
 
 
 # Data balancing...
