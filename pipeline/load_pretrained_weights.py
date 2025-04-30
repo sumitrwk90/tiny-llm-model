@@ -32,6 +32,7 @@ def assign(left, right):
     return torch.nn.Parameter(torch.tensor(right))
 
 
+# load gpt-2 params in GPTModel
 def load_weights_into_gpt(gpt, params):
     gpt.pos_emb.weight = assign(gpt.pos_emb.weight, params['wpe'])
     gpt.tok_emb.weight = assign(gpt.tok_emb.weight, params['wte'])
@@ -107,7 +108,12 @@ model_size = CHOOSE_MODEL.split(" ")[-1].lstrip("(").rstrip(")")
 
 settings, params = download_and_load_gpt2(model_size=model_size, models_dir="gpt2")
 
+
+# Save model on model.pth path...
 model = GPTModel(BASE_CONFIG)
-model.load_state_dict(torch.load("model.pth"))
-load_weights_into_gpt(model, params)
-print("Model Loaded :", model.eval())
+torch.save(model.state_dict(), "model.pth")
+# load_weights_into_gpt(model, params)
+
+# Load model...and evaluate...
+# model.load_state_dict(torch.load("model.pth"))
+# print("Model Loaded :", model.eval())
