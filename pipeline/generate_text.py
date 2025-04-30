@@ -67,12 +67,14 @@ def text_to_token_ids(text, tokenizer):
     encoded_tensor = torch.tensor(encoded).unsqueeze(0) # add batch dimension
     return encoded_tensor
 
+
 def token_ids_to_text(token_ids, tokenizer):
     flat = token_ids.squeeze(0) # remove batch dimension
     return tokenizer.decode(flat.tolist())
 
 
 start_context = "Every effort moves you"
+
 # Load model...and evaluate...
 model = GPTModel(BASE_CONFIG)
 model.load_state_dict(torch.load("model.pth"))
