@@ -32,6 +32,7 @@ def assign(left, right):
     return torch.nn.Parameter(torch.tensor(right))
 
 
+# load gpt-2 params in GPTModel
 def load_weights_into_gpt(gpt, params):
     gpt.pos_emb.weight = assign(gpt.pos_emb.weight, params['wpe'])
     gpt.tok_emb.weight = assign(gpt.tok_emb.weight, params['wte'])
@@ -93,9 +94,8 @@ def load_weights_into_gpt(gpt, params):
     gpt.out_head.weight = assign(gpt.out_head.weight, params["wte"])
 
 
-
-
 BASE_CONFIG.update(model_configs[CHOOSE_MODEL])
+
 
 assert train_dataset.max_length <= BASE_CONFIG["context_length"], (
     f"Dataset length {train_dataset.max_length} exceeds model's context "
@@ -103,11 +103,20 @@ assert train_dataset.max_length <= BASE_CONFIG["context_length"], (
     f"`max_length={BASE_CONFIG['context_length']}`"
 )
 
+
 model_size = CHOOSE_MODEL.split(" ")[-1].lstrip("(").rstrip(")")
+
 
 settings, params = download_and_load_gpt2(model_size=model_size, models_dir="gpt2")
 
+
+# Save model on model.pth path...
 model = GPTModel(BASE_CONFIG)
-model.load_state_dict(torch.load("model.pth"))
+torch.save(model.state_dict(), "model.pth")
 load_weights_into_gpt(model, params)
+<<<<<<< HEAD
 print("Model Loaded :", model.eval())
+=======
+print(model)
+
+>>>>>>> 296db3a96e18bae9e9d1da63e92666b7675cd7d0
