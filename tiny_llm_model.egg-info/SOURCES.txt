@@ -1,0 +1,10 @@
+README.md
+setup.py
+configs/__init__.py
+configs/config_Anima_350M.py
+src/__init__.py
+src/generate_text.py
+tiny_llm_model.egg-info/PKG-INFO
+tiny_llm_model.egg-info/SOURCES.txt
+tiny_llm_model.egg-info/dependency_links.txt
+tiny_llm_model.egg-info/top_level.txt
