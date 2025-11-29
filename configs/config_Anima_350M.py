@@ -24,6 +24,7 @@ class ModelConfig:
 @dataclass
 class TrainingConfig:
     tokens: int = 1000000000
+    vocab_size: int = 32000
     seq_len: int = 2048
     micro_batch_size: int = 8
     global_batch_size: int = 1024

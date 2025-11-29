@@ -12,7 +12,7 @@ from configs.config_Anima_350M import ModelConfig
 
 
 @dataclass
-class ModelConfig(PretrainedConfig):
+class AnimaConfig(PretrainedConfig):
     model_type = "Anima_350m"
 
     def __init__(
@@ -281,7 +281,7 @@ class TransformerBlock(nn.Module):
     present_kv returned in same format.
     """
     def __init__(self,
-                 cfg: ModelConfig):
+                 cfg: AnimaConfig):
         super().__init__()
         self.norm1 = RMSNorm(cfg.emb_dim)
         self.attn = MultiHeadAttention(cfg.emb_dim, 
@@ -327,10 +327,10 @@ class TransformerBlock(nn.Module):
 
 """ ReasoningModel with KV cache and decode_step """
 class Anima(PreTrainedModel):
-    config_class = ModelConfig
+    config_class = AnimaConfig
 
     def __init__(self, 
-                 config: ModelConfig):
+                 config: AnimaConfig):
         super().__init__(config)
         self.config = config
         self.token_embedding = nn.Embedding(config.vocab_size, config.emb_dim)
@@ -502,7 +502,7 @@ class Anima(PreTrainedModel):
 # --- Example usage / small demo ---
 if __name__ == "__main__":
 
-    config = ModelConfig()
+    config = AnimaConfig()
     model = Anima(config)
 
     device = torch.device("cpu")
